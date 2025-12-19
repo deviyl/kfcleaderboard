@@ -87,4 +87,53 @@ body {
 .player-info { flex-grow: 1; font-size: 0.9rem; }
 .player-score { background: #1a1a1a; padding: 5px 10px; border-radius: 5px; color: #00d2ff; }
 
-footer { text-align: center; font-size: 0.7rem; opacity: 0.6; margin-top: 15px; }
+.admin-section {
+    padding: 10px;
+    text-align: left;
+}
+
+.admin-input, .member-dropdown, .score-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.admin-btn {
+    width: 100%;
+    padding: 12px;
+    background: #c0392b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.admin-btn:hover { background: #e74c3c; }
+
+.score-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.small-btn {
+    background: #2ecc71;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.admin-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
