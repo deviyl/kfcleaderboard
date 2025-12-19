@@ -49,6 +49,14 @@ function createRow() {
     });
 }
 
+function updateStatus(msg) {
+    const statusEl = document.getElementById('status-msg');
+    if (statusEl) {
+        statusEl.innerText = msg;
+    } else {
+        console.log("Status Update:", msg);
+    }
+}
 document.getElementById('add-row-btn').addEventListener('click', createRow);
 
 document.getElementById('clear-all-btn').addEventListener('click', () => {
