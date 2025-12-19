@@ -1,0 +1,63 @@
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.leaderboard-container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #f1c40f; /* Gold */
+}
+
+/* Podium Styles */
+.podium {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 15px;
+    margin-bottom: 40px;
+    height: 200px;
+}
+
+.podium-item {
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    width: 120px;
+    font-weight: bold;
+}
+
+.first { background: linear-gradient(to top, #f1c40f, #f39c12); height: 100%; color: black; order: 2; }
+.second { background: linear-gradient(to top, #bdc3c7, #95a5a6); height: 80%; color: black; order: 1; }
+.third { background: linear-gradient(to top, #e67e22, #d35400); height: 60%; color: white; order: 3; }
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #2c3e50;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #34495e;
+}
+
+th { background-color: #34495e; color: #ecf0f1; }
+tr:hover { background-color: #3e5871; }
+
+.refresh-note { font-size: 0.8rem; color: #7f8c8d; margin-top: 20px; }
