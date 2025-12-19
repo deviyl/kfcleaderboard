@@ -130,10 +130,36 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .admin-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.score-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.remove-row-btn {
+    background: #c0392b;
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.remove-row-btn:hover {
+    background: #ff4d4d;
 }
