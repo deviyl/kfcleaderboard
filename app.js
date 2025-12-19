@@ -1,61 +1,40 @@
 const apiUrl = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gmemscore';
 
-async function updateLeaderboard() {
+async function fetchLeaderboard() {
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
 
-        let players = Object.keys(data).map(id => {
-            return {
-                id: id,
-                name: data[id][0],
-                score: parseInt(data[id][1])
-            };
-        });
+        let players = Object.keys(data).map(id => ({
+            id: id,
+            name: data[id][0],
+            score: parseInt(data[id][1])
+        })).sort((a, b) => b.score - a.score);
 
-        // sort by score
-        players.sort((a, b) => b.score - a.score);
-
-        renderPodium(players.slice(0, 3));
-        renderTable(players.slice(3));
-
-    } catch (error) {
-        console.error("Error fetching leaderboard:", error);
+        renderUI(players);
+    } catch (e) {
+        console.error("Fetch failed", e);
     }
 }
 
-function renderPodium(topThree) {
-    const podiumEl = document.getElementById('podium');
-    podiumEl.innerHTML = '';
+function renderUI(players) {
+    const podium = document.getElementById('podium');
+    const list = document.getElementById('leaderboard-list');
 
-    topThree.forEach((player, index) => {
-        const rankClass = index === 0 ? 'first' : index === 1 ? 'second' : 'third';
-        const div = document.createElement('div');
-        div.className = `podium-item ${rankClass}`;
-        div.innerHTML = `
-            <div>#${index + 1}</div>
-            <div style="font-size: 0.9rem">${player.name}</div>
-            <div style="font-size: 1.2rem">${player.score}</div>
-        `;
-        podiumEl.appendChild(div);
-    });
-}
+    podium.innerHTML = players.slice(0, 3).map((p, i) => `
+        <div class="hex rank-${i+1}">
+            <div class="name">${p.name}</div>
+            <div class="score">${p.score.toLocaleString()}</div>
+        </div>
+    `).join('');
 
-function renderTable(others) {
-    const body = document.getElementById('leaderboard-body');
-    body.innerHTML = '';
-
-    others.forEach((player, index) => {
-        const row = `
-            <tr>
-                <td>${index + 4}</td>
-                <td>${player.name}</td>
-                <td>${player.score}</td>
-            </tr>
-        `;
-        body.innerHTML += row;
-    });
-}
-
-updateLeaderboard();
-setInterval(updateLeaderboard, 30000);
+    list.innerHTML = players.slice(3).map((p, i) => `
+        <div class="list-item">
+            <span class="rank-num">#${i + 4}</span>
+            <div class="player-info">${p.name} (${p.id})</div>
+            <div class="player-score">${p.score.toLocaleString()}</div>
+        </div>
+    `).join('');
+}  
+fetchLeaderboard();
+setInterval(fetchLeaderboard, 30000);
