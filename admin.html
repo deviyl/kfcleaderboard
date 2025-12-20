@@ -11,32 +11,43 @@
         <header>
             <div class="title-bar">KFC ADMIN</div>
         </header>
-        <p id="status-msg">Awaiting Command...</p>
-        <section class="admin-section">
-            <h3>System Sync</h3>
-            <input type="text" id="api-key" placeholder="Enter Public API Key" class="admin-input">
-            <button id="sync-btn" class="admin-btn">REFRESH MEMBER LIST</button>
-        </section>
+        
+        <p id="status-msg">System Locked...</p>
 
-        <hr style="border: 1px solid #444; margin: 20px 0;">
+        <div id="login-screen">
+            <section class="admin-section">
+                <h3>Identity Verification</h3>
+                <input type="text" id="auth-key" placeholder="Enter Public Torn API Key" class="admin-input">
+                <button id="login-btn" class="admin-btn">AUTHENTICATE</button>
+            </section>
+        </div>
 
-        <section class="admin-section">
-            <h3>Member Score Adjustments</h3>
-            <div id="score-rows-container">
-                <div class="score-row">
-                    <select class="member-dropdown"></select>
-                    <input type="number" placeholder="Score" class="score-input">
+        <div id="admin-content" style="display: none;">
+            <section class="admin-section">
+                <h3>System Sync</h3>
+                <button id="sync-btn" class="admin-btn">REFRESH MEMBER LIST</button>
+            </section>
+
+            <hr style="border: 1px solid #444; margin: 20px 0;">
+
+            <section class="admin-section">
+                <h3>Member Score Adjustments</h3>
+                <div id="score-rows-container">
+                    <div class="score-row">
+                        <select class="member-dropdown"></select>
+                        <input type="number" placeholder="Score" class="score-input">
+                    </div>
                 </div>
-            </div>
-            
-            <div class="admin-controls">
-                <div>
-                    <button id="add-row-btn" class="small-btn">+</button>
-                    <button id="clear-all-btn" class="small-btn" style="background: #7f8c8d;">Clear All</button>
+                
+                <div class="admin-controls">
+                    <div>
+                        <button id="add-row-btn" class="small-btn">+</button>
+                        <button id="clear-all-btn" class="small-btn" style="background: #7f8c8d;">Clear All</button>
+                    </div>
+                    <button id="submit-scores-btn" class="admin-btn">SUBMIT ALL UPDATES</button>
                 </div>
-                <button id="submit-scores-btn" class="admin-btn">SUBMIT ALL UPDATES</button>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
     <script src="adminapp.js"></script>
 </body>
