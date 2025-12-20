@@ -4,7 +4,7 @@ const UPDATE_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=ch
 
 let cachedMembers = [];
 let savedApiKey = ""; // stores key in cache for refresh logic
-const WHITELIST = ["Deviyl"]; // Authorized users
+const WHITELIST = ["Dev"]; // Authorized users
 
 // ---------------------------------------------------------------------------
 // security and login
@@ -12,7 +12,7 @@ const WHITELIST = ["Deviyl"]; // Authorized users
 document.getElementById('login-btn').addEventListener('click', async () => {
     const key = document.getElementById('auth-key').value;
     if (!key) {
-        alert("Please enter a public API Key");
+        alert("Please enter a public API Key.");
         return;
     }
 
@@ -112,10 +112,10 @@ function updateStatus(msg) {
 document.getElementById('sync-btn').addEventListener('click', async () => {
     if (!savedApiKey) return alert("API Key missing. Please refresh and login again.");
     
-    updateStatus("Syncing server member list...");
+    updateStatus("Syncing faction member list...");
     try {
         await fetch(`${SYNC_URL}${savedApiKey}`);
-        updateStatus("Sync complete. Refreshing local list...");
+        updateStatus("Sync complete. Refreshing dropdown list...");
         setTimeout(loadMembers, 200);
     } catch (e) {
         updateStatus("Sync failed.");
@@ -127,7 +127,7 @@ document.getElementById('submit-scores-btn').addEventListener('click', async () 
     const btn = document.getElementById('submit-scores-btn');
     
     btn.disabled = true;
-    updateStatus("Processing batch updates...");
+    updateStatus("Processing score updates...");
 
     for (const row of rows) {
         const id = row.querySelector('.member-dropdown').value;
@@ -147,6 +147,6 @@ document.getElementById('submit-scores-btn').addEventListener('click', async () 
         }
     }
     
-    updateStatus("Batch processing complete.");
+    updateStatus("Score update complete!");
     btn.disabled = false;
 });
