@@ -40,13 +40,13 @@ function unlockPage() {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-content').style.display = 'block';
     updateStatus(`Welcome...`);
-    loadMembers();
+    loadMembers(true); // load muted
 }
 
 // ---------------------------------------------------------------------------
 // member list and dropdown
 // ---------------------------------------------------------------------------
-async function loadMembers() {
+async function loadMembers(mute = false) {
     try {
         const response = await fetch(MEMBER_LIST_URL);
         const data = await response.json();
@@ -57,7 +57,7 @@ async function loadMembers() {
         
         const firstDropdown = document.querySelector('.member-dropdown');
         if (firstDropdown) populateDropdown(firstDropdown);
-        updateStatus("Member list updated.");
+        if (!mute) updateStatus("Member list updated.");
     } catch (e) {
         updateStatus("Failed to load members.");
     }
