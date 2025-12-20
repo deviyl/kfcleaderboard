@@ -163,3 +163,18 @@ body {
 .remove-row-btn:hover {
     background: #ff4d4d;
 }
+
+#status-msg {
+    color: #00d2ff;
+    font-size: 0.9rem;
+    margin: 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
