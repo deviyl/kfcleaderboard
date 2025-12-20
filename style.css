@@ -112,32 +112,39 @@ body {
     cursor: pointer;
     font-weight: bold;
     border-radius: 5px;
+    margin-top: 10px;
 }
 
 .admin-btn:hover { background: #e74c3c; }
 
-.score-row {
+.admin-controls {
     display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.admin-controls div:first-child {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 .small-btn {
+    flex: 1;
     background: #2ecc71;
     border: none;
     color: white;
-    padding: 5px 15px;
+    padding: 10px 2px;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 10px;
     font-weight: bold;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    text-align: center;
 }
 
-.admin-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+.small-btn:hover { opacity: 0.8; }
 
 .score-row {
     display: flex;
@@ -153,16 +160,14 @@ body {
     background: #c0392b;
     border: none;
     color: white;
-    width: 35px;
+    min-width: 35px;
     height: 35px;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
 }
 
-.remove-row-btn:hover {
-    background: #ff4d4d;
-}
+.remove-row-btn:hover { background: #ff4d4d; }
 
 #status-msg {
     color: #00d2ff;
