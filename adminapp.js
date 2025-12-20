@@ -2,8 +2,6 @@ const MEMBER_LIST_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?fu
 const AUTH_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gadmin';
 const SYNC_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=addmem&apikey=';
 const UPDATE_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=chngscore';
-
-const AUTH_SUCCESS = "valid"; 
 const AUTH_FAILURE = "invalid";
 
 let cachedMembers = [];
