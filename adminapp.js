@@ -4,7 +4,7 @@ const UPDATE_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=ch
 
 let cachedMembers = [];
 let savedApiKey = ""; // stores key in cache for refresh logic
-const WHITELIST = ["Dev"]; // Authorized users
+const WHITELIST = ["Deviyl", "Wolfylein"]; // Authorized users
 
 // ---------------------------------------------------------------------------
 // security and login
