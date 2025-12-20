@@ -1,28 +1,14 @@
 const MEMBER_LIST_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gmem';
-const WHITELIST_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gadmin';
+const AUTH_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gadmin';
 const SYNC_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=addmem&apikey=';
 const UPDATE_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=chngscore';
 
+const AUTH_SUCCESS = "valid"; 
+const AUTH_FAILURE = "invalid";
+
 let cachedMembers = [];
-let savedApiKey = ""; // stores key in cache for refresh logic
-const WHITELIST = ["Deviyl", "Wolfylein"]; // Authorized users -- remove this line when ready
-//let WHITELIST = []; // Starts empty, populated from API -- add this line when ready and uncomment the function call a few lines down
-
-
-// ---------------------------------------------------------------------------
-// populate whitelist
-// ---------------------------------------------------------------------------
-async function loadWhitelist() {
-    try {
-        const response = await fetch(WHITELIST_URL);
-        const data = await response.json();
-        WHITELIST = data;
-    } catch (e) {
-        console.error("Failed to load whitelist:", e);
-        updateStatus("Security Error: Could not load whitelist.");
-    }
-}
-//loadWhitelist(); // -- this one
+let savedApiKey = ""; // stores key in cache for any future use
+let savedAuthResult = ""; // store returned auth result
 
 // ---------------------------------------------------------------------------
 // security and login
@@ -33,31 +19,29 @@ document.getElementById('login-btn').addEventListener('click', async () => {
         alert("Please enter a public API Key.");
         return;
     }
-
     updateStatus("Verifying Identity...");
 
     try {
-        const response = await fetch(`https://api.torn.com/v2/user/basic?key=${key}`);
-        const data = await response.json();
-        const tornName = data.profile?.name;
-
-        if (WHITELIST.includes(tornName)) {
-            savedApiKey = key;
-            unlockPage(tornName);
-        } else {
+        const response = await fetch(`${AUTH_URL}`);
+        const result = await response.text();
+        if (result === AUTH_FAILURE) {
             updateStatus("Access Denied.");
-            alert(`Access Denied: ${tornName || "Unknown User"} is not authorized.`);
+            alert("Access Denied: Your API key is not authorized for admin access.");
+        } else {
+            savedApiKey = key;
+            savedAuthResult = result;
+            unlockPage();
         }
     } catch (e) {
         console.error(e);
-        updateStatus("Error: Could not reach Torn API.");
+        updateStatus("Error: Could not reach verification server.");
     }
 });
 
-function unlockPage(name) {
+function unlockPage() {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('admin-content').style.display = 'block';
-    updateStatus(`Welcome, ${name}. Terminal Online.`);
+    updateStatus(`Welcome...`);
     loadMembers();
 }
 
