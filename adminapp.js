@@ -54,6 +54,7 @@ async function loadMembers() {
             id: id,
             username: data[id][0] 
         })).sort((a, b) => a.username.localeCompare(b.username));
+        
         const firstDropdown = document.querySelector('.member-dropdown');
         if (firstDropdown) populateDropdown(firstDropdown);
         updateStatus("Member list updated.");
@@ -64,6 +65,7 @@ async function loadMembers() {
 
 function populateDropdown(selectElement) {
     if (!selectElement) return;
+    const currentVal = selectElement.value;
     selectElement.innerHTML = '<option value="">Select Member</option>';
     cachedMembers.forEach(member => {
         const opt = document.createElement('option');
@@ -71,32 +73,57 @@ function populateDropdown(selectElement) {
         opt.textContent = member.username;
         selectElement.appendChild(opt);
     });
+    if (currentVal) selectElement.value = currentVal;
 }
 
 // ---------------------------------------------------------------------------
 // dynamic rows
 // ---------------------------------------------------------------------------
-function createRow() {
+function createRow(selectedId = null, initialScore = "") {
     const container = document.getElementById('score-rows-container');
     const row = document.createElement('div');
     row.className = 'score-row';
     row.innerHTML = `
         <select class="member-dropdown"></select>
-        <input type="number" placeholder="Score" class="score-input">
+        <input type="number" placeholder="Score" class="score-input" value="${initialScore}">
         <button class="remove-row-btn">-</button>
     `;
     container.appendChild(row);
 
-    populateDropdown(row.querySelector('.member-dropdown'));
+    const dropdown = row.querySelector('.member-dropdown');
+    populateDropdown(dropdown);
+    
+    if (selectedId) {
+        dropdown.value = selectedId;
+    }
+
     row.querySelector('.remove-row-btn').addEventListener('click', () => {
         row.remove();
     });
 }
 
-document.getElementById('add-row-btn').addEventListener('click', createRow);
+document.getElementById('add-row-btn').addEventListener('click', () => createRow());
+
 document.getElementById('clear-all-btn').addEventListener('click', () => {
     document.getElementById('score-rows-container').innerHTML = '';
     createRow();
+});
+
+// add 1 to everyone else
+document.getElementById('fill-remainder-btn').addEventListener('click', () => {
+    const selectedIds = Array.from(document.querySelectorAll('.member-dropdown'))
+                             .map(dropdown => dropdown.value)
+                             .filter(id => id !== "");
+    const missingMembers = cachedMembers.filter(member => !selectedIds.includes(member.id));
+    if (missingMembers.length === 0) {
+        updateStatus("All members already listed.");
+        return;
+    }
+    missingMembers.forEach(member => {
+        createRow(member.id, 1);
+    });
+
+    updateStatus(`Added ${missingMembers.length} members with +1 point.`);
 });
 
 // ---------------------------------------------------------------------------
