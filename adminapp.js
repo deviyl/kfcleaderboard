@@ -142,7 +142,7 @@ document.getElementById('sync-btn').addEventListener('click', async () => {
     updateStatus("Syncing faction member list...");
     try {
         await fetch(`${SYNC_URL}${savedApiKey}`);
-        updateStatus("Sync complete. Refreshing dropdown list...");
+        updateStatus("Sync complete...");
         setTimeout(loadMembers, 200);
     } catch (e) {
         updateStatus("Sync failed.");
