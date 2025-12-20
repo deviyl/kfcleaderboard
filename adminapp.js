@@ -2,11 +2,17 @@ const MEMBER_LIST_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?fu
 const AUTH_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gadmin';
 const SYNC_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=addmem&apikey=';
 const UPDATE_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=chngscore';
+const LEADERBOARD_URL = 'https://deviyl.github.io/kfcleaderboard/';
 const AUTH_FAILURE = "Imposter";
 
 let cachedMembers = [];
 let savedApiKey = ""; // stores key in cache for any future use
 let savedAuthResult = ""; // store returned auth result
+
+//back to main
+document.getElementById('back-to-main-btn').addEventListener('click', () => {
+    window.location.href = LEADERBOARD_URL;
+});
 
 // ---------------------------------------------------------------------------
 // security and login
