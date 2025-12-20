@@ -24,7 +24,7 @@ document.getElementById('login-btn').addEventListener('click', async () => {
     try {
         const response = await fetch(`${AUTH_URL}`);
         const result = await response.text();
-        if (AUTH_FAILURE === AUTH_FAILURE) {
+        if (result === AUTH_FAILURE) {
             updateStatus("Access Denied.");
             alert("Access Denied: Your API key is not authorized for admin access.");
         } else {
