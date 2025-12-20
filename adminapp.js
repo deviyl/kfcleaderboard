@@ -1,10 +1,28 @@
 const MEMBER_LIST_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gmem';
+const WHITELIST_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gadmin';
 const SYNC_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=addmem&apikey=';
-const UPDATE_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=chngscore&member=';
+const UPDATE_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=chngscore';
 
 let cachedMembers = [];
 let savedApiKey = ""; // stores key in cache for refresh logic
-const WHITELIST = ["Deviyl", "Wolfylein"]; // Authorized users
+const WHITELIST = ["Deviyl", "Wolfylein"]; // Authorized users -- remove this line when ready
+//let WHITELIST = []; // Starts empty, populated from API -- add this line when ready and uncomment the function call a few lines down
+
+
+// ---------------------------------------------------------------------------
+// populate whitelist
+// ---------------------------------------------------------------------------
+async function loadWhitelist() {
+    try {
+        const response = await fetch(WHITELIST_URL);
+        const data = await response.json();
+        WHITELIST = data;
+    } catch (e) {
+        console.error("Failed to load whitelist:", e);
+        updateStatus("Security Error: Could not load whitelist.");
+    }
+}
+//loadWhitelist(); // -- this one
 
 // ---------------------------------------------------------------------------
 // security and login
@@ -164,7 +182,7 @@ document.getElementById('submit-scores-btn').addEventListener('click', async () 
             row.style.background = "rgba(241, 196, 15, 0.2)"; // yellow while updating
             updateStatus(`Updating ID: ${id}...`);
             try {
-                await fetch(`${UPDATE_URL}${id}&score=${score}`);
+                await fetch(`${UPDATE_URL}&member=${id}&score=${score}&apikey=${savedApiKey}`);
                 await new Promise(r => setTimeout(r, 200));
                 row.style.background = "rgba(46, 204, 113, 0.2)"; // green if success
             } catch (e) {
