@@ -4,13 +4,12 @@
     --silver: #bdc3c7;
     --bronze: #cd7f32;
     --bg-dark: #121417;
-    --neon-red: #ff2600;
     --row-bg: rgba(40, 44, 52, 0.9);
 }
-﻿
+
 body {
     background-color: #1a0a00; 
-    background-image: url('chicken.png');
+    background-image: url('chicken.png'); 
     background-size: auto; 
     background-repeat: repeat; 
     background-attachment: fixed; 
@@ -22,35 +21,34 @@ body {
     min-height: 100vh;
     margin: 0;
 }
-﻿
+
 .game-frame {
     width: 400px;
-    background: rgba(0, 0, 0, 0.90);
+    background: rgba(0, 0, 0, 0.85);
     border: 4px solid #444;
     border-radius: 20px;
-    box-shadow: 0 0 20px var(--neon-red);
+    box-shadow: 0 0 20px var(--neon-blue);
     padding: 20px;
     position: relative;
 }
-﻿
+
 .title-bar {
-    background: linear-gradient(to right, #E62037, #E6B5B5, #E30505);
+    background: linear-gradient(to right, #2980b9, #6dd5fa, #2980b9);
     padding: 10px;
     border-radius: 10px;
     text-align: center;
-    text-shadow: 2px 2px 2px #121417;
     font-size: 1.2rem;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
     margin-bottom: 20px;
 }
-﻿
+
 .podium-container {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
     margin-bottom: 25px;
 }
-﻿
+
 .hex {
     width: 90px;
     height: 100px;
@@ -63,14 +61,14 @@ body {
     text-align: center;
     border: 2px solid white;
 }
-﻿
+
 .hex.rank-1 { border-color: var(--gold); background: linear-gradient(145deg, #f1c40f, #9b59b6); scale: 1.2; z-index: 2; }
-.hex.rank-2 { border-color: var(--silver); order: -1;}
+.hex.rank-2 { border-color: var(--silver); order: -1; }
 .hex.rank-3 { border-color: var(--bronze); }
-﻿
-.hex .name { font-size: 0.5rem; overflow: hidden; max-width: 80px;}
+
+.hex .name { font-size: 0.7rem; overflow: hidden; max-width: 80px;}
 .hex .score { font-size: 0.9rem; font-weight: bold;}
-﻿
+
 .list-item {
     background: var(--row-bg);
     margin: 8px 0;
@@ -82,18 +80,18 @@ body {
     border: 1px solid #444;
     transition: 0.3s;
 }
-﻿
-.list-item:hover { border-color: var(--neon-red); }
-﻿
-.rank-num { color: var(--neon-red); font-style: italic; margin-right: 10px; }
+
+.list-item:hover { border-color: var(--neon-blue); }
+
+.rank-num { color: var(--neon-blue); font-style: italic; margin-right: 10px; }
 .player-info { flex-grow: 1; font-size: 0.9rem; }
-.player-score { background: #1a1a1a; padding: 5px 10px; border-radius: 5px; color: #E88080; }
-﻿
+.player-score { background: #1a1a1a; padding: 5px 10px; border-radius: 5px; color: #00d2ff; }
+
 .admin-section {
     padding: 10px;
     text-align: left;
 }
-﻿
+
 .admin-input, .member-dropdown, .score-input {
     width: 100%;
     padding: 10px;
@@ -104,7 +102,7 @@ body {
     border-radius: 5px;
     box-sizing: border-box;
 }
-﻿
+
 .admin-btn {
     width: 100%;
     padding: 12px;
@@ -116,22 +114,22 @@ body {
     border-radius: 5px;
     margin-top: 10px;
 }
-﻿
+
 .admin-btn:hover { background: #e74c3c; }
-﻿
+
 .admin-controls {
     display: flex;
     flex-direction: column;
     gap: 15px;
     margin-top: 20px;
 }
-﻿
+
 .admin-controls div:first-child {
     display: flex;
     justify-content: space-between;
     gap: 8px;
 }
-﻿
+
 .small-btn {
     flex: 1;
     background: #2ecc71;
@@ -145,9 +143,9 @@ body {
     white-space: nowrap;
     text-align: center;
 }
-﻿
+
 .small-btn:hover { opacity: 0.8; }
-﻿
+
 .score-row {
     display: flex;
     gap: 10px;
@@ -157,7 +155,7 @@ body {
     border-radius: 8px;
     transition: background 0.3s;
 }
-﻿
+
 .remove-row-btn {
     background: #c0392b;
     border: none;
@@ -168,25 +166,20 @@ body {
     cursor: pointer;
     font-weight: bold;
 }
-﻿
+
 .remove-row-btn:hover { background: #ff4d4d; }
-﻿
+
 #status-msg {
-    color: #E88080;
+    color: #00d2ff;
     font-size: 0.9rem;
     margin: 10px 0;
     text-transform: uppercase;
     letter-spacing: 1px;
     animation: blink 2s infinite;
 }
-﻿
+
 @keyframes blink {
     0% { opacity: 1; }
     50% { opacity: 0.4; }
     100% { opacity: 1; }
 }
-﻿
-#error{
-    text-align: center;
-}
-
