@@ -1,5 +1,5 @@
 const MEMBER_LIST_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gmem';
-const AUTH_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gadmin';
+const AUTH_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=gadmin&apikey=';
 const SYNC_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=addmem&apikey=';
 const UPDATE_URL = 'https://www.wolfhaven.at/Leaderboard/leaderboard.php?func=chngscore';
 const LEADERBOARD_URL = 'https://deviyl.github.io/kfcleaderboard/';
@@ -26,8 +26,8 @@ document.getElementById('login-btn').addEventListener('click', async () => {
     updateStatus("Verifying Identity...");
 
     try {
-        const response = await fetch(`${AUTH_URL}`);
-        const result = await response.text();
+        const response = await fetch(`${AUTH_URL}${key}`);
+        const result = await response.text().trim();
         if (result === AUTH_FAILURE) {
             updateStatus("Access Denied.");
             alert("Access Denied: Your API key is not authorized for admin access.");
@@ -147,7 +147,7 @@ document.getElementById('sync-btn').addEventListener('click', async () => {
     
     updateStatus("Syncing faction member list...");
     try {
-        await fetch(`${SYNC_URL}${savedApiKey}`);
+        await fetch(`${SYNC_URL}${savedApiKey}&auth=${savedAuthResult}`);
         updateStatus("Sync complete...");
         setTimeout(loadMembers, 200);
     } catch (e) {
@@ -170,7 +170,7 @@ document.getElementById('submit-scores-btn').addEventListener('click', async () 
             row.style.background = "rgba(241, 196, 15, 0.2)"; // yellow while updating
             updateStatus(`Updating ID: ${id}...`);
             try {
-                await fetch(`${UPDATE_URL}&member=${id}&score=${score}&apikey=${savedApiKey}`);
+                await fetch(`${UPDATE_URL}&member=${id}&score=${score}&auth=${savedAuthResult}`);
                 await new Promise(r => setTimeout(r, 200));
                 row.style.background = "rgba(46, 204, 113, 0.2)"; // green if success
             } catch (e) {
